@@ -1,12 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './screens/HomeScreen';
+import CreateBlogScreen from './screens/CreateBlogScreen';
+import { BlogProvider } from './context/BlogContext';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
+  
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <BlogProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerTitle:"Blog Uygulaması"}} initialRouteName='' >
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="CreateBlog" component={CreateBlogScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </BlogProvider>
   );
 }
 
